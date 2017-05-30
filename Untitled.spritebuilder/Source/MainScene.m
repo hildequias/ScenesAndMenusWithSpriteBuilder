@@ -1,5 +1,7 @@
 #import "MainScene.h"
 #import "cocos2d-ui.h"
+#import "GameplayScene.h"
+#import "LevelSelectionScene.h"
 
 @implementation MainScene
 
@@ -37,16 +39,46 @@
         
         CCButton *playBtn = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"playBtn_normal.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"playBtn_pressed.png"] disabledSpriteFrame:nil];
         
+        [playBtn setTarget:self selector:@selector(playBtnPressed:)];
+        
+        CCButton *menuBtn = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"menuBtn.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"menuBtn.png"] disabledSpriteFrame:nil];
+        
+        [menuBtn setTarget:self selector:@selector(menuBtnPressed:)];
+        
+        
+        
+        
+        
         CCLayoutBox *btnMenu = [[CCLayoutBox alloc] init];
         btnMenu.anchorPoint = ccp(0.5f, 0.5f);
         btnMenu.position = CGPointMake(winSize.width/2, winSize.height * 0.5);
+        btnMenu.direction = CCLayoutBoxDirectionVertical;
+        btnMenu.spacing = 10.0f;
+        
+        [btnMenu addChild:menuBtn];
         [btnMenu addChild:playBtn];
         
         [self addChild:btnMenu];
-        
     }
     
     return self;
+}
+
+-(void)playBtnPressed:(id)sender{
+    
+    CCLOG(@"play button pressed");
+    
+    CCTransition *transition = [CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:0.20];
+    
+    [[CCDirector sharedDirector] replaceScene:[[GameplayScene alloc] initWithLevel:@"1"] withTransition:transition];
+}
+
+-(void)menuBtnPressed:(id)sender {
+    CCLOG(@"menu button pressed");
+    
+    CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:0.20];
+    
+    [[CCDirector sharedDirector] replaceScene: [[LevelSelectionScene alloc] init] withTransition:transition];
 }
 
 @end
