@@ -1,0 +1,2 @@
+# ScenesAndMenusWithSpriteBuilder
+Scenes are the building blocks of any game. Generally, in any game, you have the main  menu scene in which you are allowed to navigate to different scenes, such as GameScene,  OptionsScene, and CreditsScene. In each of these scenes, you have menus.  Similarly, in MainScene, there is a play button that is part of a menu that, when pressed,  takes the player to GameScene, where the gameplay code runs.
